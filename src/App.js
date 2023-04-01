@@ -8,7 +8,7 @@ function App() {
     <Routes>
        <Route path="/" element={<Form />} />
         {/* <Route path="/" element={<AllNotes images={images} term={term} setTerm={setTerm} />} /> */}
-        <Route path="/note/:id" element={<SingleNote />} />
+        {/* <Route path="/note/:id" element={<SingleNote />} /> */}
       </Routes>
     
   );
