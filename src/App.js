@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Form from "./components/form";
- import SingleNote from "./pages/singlenote";
+
 function App() {
   
   return (
