@@ -215,7 +215,7 @@ const Form = () => {
                 for="text"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
-                Facility Name and Contact Details
+                Facility Name  
               </label>
               <input
                 type="text"

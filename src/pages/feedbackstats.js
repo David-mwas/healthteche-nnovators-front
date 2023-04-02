@@ -66,7 +66,7 @@ function Chart() {
 
   return (
     <div className="p-12 bg-white dark:bg-gray-900">
-    <div  style={{ width: 800 }}>
+    <div  style={{ width: 1000 }}>
       <h1 className="text-xl dark:text-white font-bold">Facilities Responses</h1>
       <div className="mx-auto p-8">
       <div className="grid gap-3 mx-10 grid-cols-3  ">
