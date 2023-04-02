@@ -13,7 +13,7 @@ function App() {
     <Routes>
        <Route path="/" element={<Form />} />
        <Route path="/stats" element={<Stats />} />
-       <Route path="/notes" element={<Chart />} />
+       <Route path="/analytics" element={<Chart />} />
        <Route path="/feedback/:id" element={<SingleFeed />} />
 
         {/* <Route path="/" element={<AllNotes images={images} term={term} setTerm={setTerm} />} /> */}
