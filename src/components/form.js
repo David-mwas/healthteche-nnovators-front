@@ -168,14 +168,14 @@ const Form = () => {
                         </a>
                       </li>
                       <li>
-                        <a
-                          href="/"
-                          aria-label="Sign in"
-                          title="Sign in"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                        >
-                          Sign in
-                        </a>
+                      <Link
+                to="/analytics"
+                aria-label="Sign in"
+                title="Sign in"
+                class="font-medium dark:bg-white p-4 rounded text-black tracking-wide  transition-colors duration-200 hover:text-teal-accent-400"
+              >
+                View Analytics
+              </Link>
                       </li>
                       <li>
                         <a
