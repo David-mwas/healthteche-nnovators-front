@@ -1,18 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 const Form = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    position: "",
-    waiting_time: 0,
-    lab_courtesy: 0,
-    querry_response: 0,
-    lab_reliability: 0,
-    services_liked: "",
-    services_unliked: "",
-    suggestions: "",
+    "name": "",
+    "position": "",
+    "waiting_time": 0,
+    "lab_courtesy": 0,
+    "querry_response": 0,
+    "lab_reliability": 0,
+    "services_liked": "",
+    "services_unliked": "",
+    "suggestions": "",
     
   });
   const inputHandler = (e) => {
@@ -24,8 +25,18 @@ const Form = () => {
     }));
   }
    const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData)
+     e.preventDefault();
+     const jsonData = JSON.stringify(formData);
+     console.log(jsonData)
+     axios.post('https://healthitfeed-production.up.railway.app/api/create/', jsonData, {
+        headers: {
+    'Content-Type': 'application/json' // Set the content type to JSON
+  }
+     }).then((response) => {
+       console.log(response)
+     }).catch((error) => {
+       console.log(error)
+     })
   }
   
   return (
