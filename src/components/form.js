@@ -1,18 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 const Form = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    role: "",
-    waitingTime: "",
-    labCourtesy: "",
-    responseToqueries: "",
-    realiabilityOfLabResults: "",
-    likeMost: "",
-    likeLeast: "",
-    suggestions: "",
+    "name": "",
+    "position": "",
+    "waiting_time": 0,
+    "lab_courtesy": 0,
+    "querry_response": 0,
+    "lab_reliability": 0,
+    "services_liked": "",
+    "services_unliked": "",
+    "suggestions": "",
     
   });
   const inputHandler = (e) => {
@@ -24,8 +25,18 @@ const Form = () => {
     }));
   }
    const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData)
+     e.preventDefault();
+     const jsonData = JSON.stringify(formData);
+     console.log(jsonData)
+     axios.post('https://healthitfeed-production.up.railway.app/api/create/', jsonData, {
+        headers: {
+    'Content-Type': 'application/json' // Set the content type to JSON
+  }
+     }).then((response) => {
+       console.log(response)
+     }).catch((error) => {
+       console.log(error)
+     })
   }
   
   return (
@@ -263,19 +274,19 @@ const Form = () => {
 <ul className="mb-8 w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
     <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
         <div className="flex items-center pl-3">
-            <input id="vue-checkbox" onChange={inputHandler} type="checkbox" name="role" value="staff" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+            <input id="vue-checkbox" onChange={inputHandler} type="checkbox" name="position" value="staff" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
             <label htmor="vue-checkbox" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Staff</label>
         </div>
     </li>
     <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
         <div className="flex items-center pl-3">
-            <input id="react-checkbox" onChange={inputHandler} type="checkbox" name="role" value="Implemeting partner" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+            <input id="react-checkbox" onChange={inputHandler} type="checkbox" name="position" value="Implemeting partner" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
             <label htmor="react-checkbox" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Implemeting partner</label>
         </div>
     </li>
     <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
         <div className="flex items-center pl-3">
-            <input id="angular-checkbox" onChange={inputHandler} type="checkbox" name="role" value="Others" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+            <input id="angular-checkbox" onChange={inputHandler} type="checkbox" name="position" value="Others" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
             <label htmor="angular-checkbox" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Others</label>
         </div>
     </li>
@@ -299,21 +310,21 @@ const Form = () => {
 <div className="flex mb-5">
     <div className="flex items-center mr-4">
                   <input 
-                   onChange={inputHandler} type="radio" name="waitingTime" value='Very Bad' 
+                   onChange={inputHandler} type="radio" name="waiting_time" value={1}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Bad</label>
+        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Bad</label>
     </div>
     <div className="flex items-center mr-4">
-        <input id="inline-2-radio" onChange={inputHandler} type="radio" name="waitingTime" value='Bad' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bad</label>
+        <input id="inline-2-radio" onChange={inputHandler} type="radio" name="waiting_time" value={2} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bad</label>
     </div>
     <div className="flex items-center mr-4">
-        <input  id="inline-checked-radio" onChange={inputHandler} type="radio" name="waitingTime" value='Good' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-checked-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Good</label>
+        <input  id="inline-checked-radio" onChange={inputHandler} type="radio" name="waiting_time" value={3} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-checked-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Good</label>
     </div>
     <div className="flex items-center">
-        <input  id="inline-radio" onChange={inputHandler} type="radio" name="waitingTime" value='Very Good' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-        <label hor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Good</label>
+        <input  id="inline-radio" onChange={inputHandler} type="radio" name="waiting_time" value={4} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Good</label>
     </div>
 </div>
 
@@ -326,20 +337,20 @@ const Form = () => {
 
 <div className="flex mb-5">
     <div className="flex items-center mr-4">
-        <input id="inline-radio" onChange={inputHandler} type="radio" name="labCourtesy" value='Very Bad' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Bad</label>
+        <input id="inline-radio" onChange={inputHandler} type="radio" name="lab_courtesy" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Bad</label>
     </div>
     <div className="flex items-center mr-4">
-        <input id="inline-2-radio" onChange={inputHandler} type="radio" name="labCourtesy" value='Bad' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bad</label>
+        <input id="inline-2-radio" onChange={inputHandler} type="radio" name="lab_courtesy" value={2} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bad</label>
     </div>
     <div className="flex items-center mr-4">
-        <input id="inline-checked-radio" onChange={inputHandler} type="radio" name="labCourtesy" value='Good' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-checked-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Good</label>
+        <input id="inline-checked-radio" onChange={inputHandler} type="radio" name="lab_courtesy" value={3} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-checked-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Good</label>
     </div>
     <div className="flex items-center">
-        <input  id="inline-radio" onChange={inputHandler} type="radio" name="labCourtesy" value='Very Good' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-        <label hor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Good</label>
+        <input  id="inline-radio" onChange={inputHandler} type="radio" name="lab_courtesy" value={4} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Good</label>
     </div>
 </div>
 
@@ -352,20 +363,20 @@ const Form = () => {
 
 <div className="flex mb-5">
     <div className="flex items-center mr-4">
-        <input id="inline-radio" onChange={inputHandler} type="radio" name="responseToqueries" value='Very Bad' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Bad</label>
+        <input id="inline-radio" onChange={inputHandler} type="radio" name="querry_response" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Bad</label>
     </div>
     <div className="flex items-center mr-4">
-        <input id="inline-2-radio" onChange={inputHandler} type="radio" name="responseToqueries" value='Bad' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bad</label>
+        <input id="inline-2-radio" onChange={inputHandler} type="radio" name="querry_response" value={2} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bad</label>
     </div>
     <div className="flex items-center mr-4">
-        <input  id="inline-checked-radio" onChange={inputHandler} type="radio" name="responseToqueries" value='Good' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-checked-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Good</label>
+        <input  id="inline-checked-radio" onChange={inputHandler} type="radio" name="querry_response" value={3} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-checked-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Good</label>
     </div>
     <div className="flex items-center">
-        <input  id="inline-radio" onChange={inputHandler} type="radio" name="responseToqueries" value='Very Good' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-        <label hor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Good</label>
+        <input  id="inline-radio" onChange={inputHandler} type="radio" name="querry_response" value={4} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Good</label>
     </div>
 </div>
 
@@ -378,20 +389,20 @@ const Form = () => {
 
 <div className="flex mb-5">
     <div className="flex items-center mr-4">
-        <input id="inline-radio" onChange={inputHandler} type="radio" name="realiabilityOfLabResults" value='Very Bad' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Bad</label>
+        <input id="inline-radio" onChange={inputHandler} type="radio" name="lab_reliability" value={1} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Bad</label>
     </div>
     <div className="flex items-center mr-4">
-        <input id="inline-2-radio" onChange={inputHandler} type="radio" name="realiabilityOfLabResults" value='Bad' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bad</label>
+        <input id="inline-2-radio" onChange={inputHandler} type="radio" name="lab_reliability"value={2} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bad</label>
     </div>
     <div className="flex items-center mr-4">
-        <input id="inline-checked-radio" onChange={inputHandler} type="radio" name="realiabilityOfLabResults" value='Good' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label hor="inline-checked-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Good</label>
+        <input id="inline-checked-radio" onChange={inputHandler} type="radio" name="lab_reliability" value={3} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+        <label htmlFor="inline-checked-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Good</label>
     </div>
     <div className="flex items-center">
-        <input  id="inline-radio" onChange={inputHandler} type="radio" name="realiabilityOfLabResults" value='Very Good' className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-        <label hor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Good</label>
+        <input  id="inline-radio" onChange={inputHandler} type="radio" name="lab_reliability" value={4} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+        <label htmlFor="inline-radio" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Very Good</label>
     </div>
 </div>
 
@@ -407,8 +418,8 @@ const Form = () => {
               </label>
               <input
                  onChange={inputHandler}
-                name="likeMost"
-                value={formData.likeMost}
+                name="services_liked"
+                value={formData.services_liked}
                 type="text"
                 id="subject"
                 className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
@@ -425,8 +436,8 @@ const Form = () => {
               </label>
               <input
                  onChange={inputHandler}
-                name="likeLeast"
-                value={formData.likeLeast}
+                name="services_unliked"
+                value={formData.services_unliked}
                 type="text"
                 id="subject"
                 className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
