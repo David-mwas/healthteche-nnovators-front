@@ -25,7 +25,8 @@ const Form = () => {
     }));
   }
    const handleSubmit = (e) => {
-     e.preventDefault();
+    //  e.preventDefault();
+
      const jsonData = JSON.stringify(formData);
      console.log(jsonData)
      axios.post('https://healthitfeed-production.up.railway.app/api/create/', jsonData, {
@@ -34,9 +35,10 @@ const Form = () => {
   }
      }).then((response) => {
        console.log(response)
-     }).catch((error) => {
-       console.log(error)
-     })
+      }).catch((error) => {
+        console.log(error)
+      })
+      // alert('succes')
   }
   
   return (
@@ -470,7 +472,9 @@ const Form = () => {
             </button>
           </form>
         </div>
+     
       </section>
+      
     </>
   );
 };
